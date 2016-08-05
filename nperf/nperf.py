@@ -24,11 +24,12 @@ class nperf:
             cps = (self.count - self.lastcount) / telapsed
             if self.maxcount > 0:
                 eta = int((self.maxcount - self.count) / cps)
-                eta_m = int(eta / 60)
+                eta_h = int(eta / 60 / 60)
+                eta_m = int(eta / 60 % 60)
                 eta_s = eta % 60
                 sys.stderr.write(
-                    '%s count: %d/%d, elapsed %.1f speed %.3f steps/sec, eta %d:%02d' %
-                    (tag, self.count, self.maxcount, telapsed, cps, eta_m, eta_s) + '\n')
+                    '%s count: %d/%d, elapsed %.1f speed %.3f steps/sec, eta %d:%02d:%02d' %
+                    (tag, self.count, self.maxcount, telapsed, cps, eta_h, eta_m, eta_s) + '\n')
             else:
                 sys.stderr.write(
                     '%s count: %d, elapsed %.1f speed %.3f steps/sec' %
